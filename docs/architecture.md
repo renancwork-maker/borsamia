@@ -38,3 +38,6 @@ O briefing prefere React+Vite, mas o usuário explicitamente pediu aplicar **o b
 
 ## Limitações
 Sem npm/cache de pacotes ou acesso ao repositório no terminal disponível; construção manual com dependências declaradas, sem lockfile e sem validação de resolução. Scripts e configurações precisam ser testados por instalação real antes de produção. Não foi possível entrar na sessão autenticada do Yarnl para análise visual por browser; apenas estrutura pública textual consultada.
+
+## Atualização: autenticação administrativa
+Implementados `/admin/accedi`, `/admin` e `/api/admin/session`: Supabase Auth com senha + TOTP e guarda servidor para identidade, AAL2, sessão e administrador ativo. Painel inicial sem dados comerciais. Configuração, revogação e limitações em [admin-setup.md](admin-setup.md). Não houve migração nem publicação nesta entrega.

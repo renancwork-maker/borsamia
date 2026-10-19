@@ -15,3 +15,6 @@ Lista de padrões em grades com fotos, filtros por dificuldade/categoria; detalh
 
 ## Evidência e ressalva
 A página pública de Yarnl demonstra biblioteca, filtros, projetos, favorito e configurações do visualizador; não foi executado login autenticado nem reproduzido comportamento interativo. Fonte: https://demo.yarnl.com/#current (consultado 2026-10-19).
+
+## Atualização administrativa
+`/admin/accedi`: formulário IT-IT com e-mail/senha, cadastro de autenticador por chave TOTP e verificação de seis dígitos. `/admin`: confirmação de acesso e logout, com estado honesto de ausência de módulos comerciais. Reutiliza estilos de login existentes.

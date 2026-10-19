@@ -53,3 +53,15 @@ Data de revisão: **2026-10-19**. Ambiente de geração: container Linux isolado
 
 ## Próxima tarefa MVP
 A partir dos eventos Hotmart de teste (com dados pessoais removidos), implementar camada de ingestão autenticada/idempotente e mapeamento persistente SKU ↔ coleção, verificando aprovações e estornos de qualquer combinação de seis produtos. Não publicar enquanto a segurança real não for testada.
+
+## Validação local da entrega administrativa — 2026-10-19
+Esta execução ocorreu no Windows, no workspace local BorsaMia; as limitações do container original acima são históricas.
+- Instalado `@supabase/supabase-js`, com atualização de package.json/package-lock.json.
+- `npm test`: 16 testes passaram em 2 arquivos (11 administrativos e 5 de permissões comerciais).
+- `npm run typecheck` e `npm run build`: passaram; rotas administrativas compiladas.
+- ESLint normal e typed direcionados aos novos arquivos: passaram.
+- `npm run check`: interrompido no lint por 9 erros preexistentes (CommonJS na regra local e apóstrofos JSX em telas existentes), além de 5 warnings. Não declarar o check completo aprovado.
+- `npm audit --omit=dev`: 1 vulnerabilidade alta em drizzle-orm <0.45.2 (GHSA-gpj5-g38j-94v9); a consulta nova usa parâmetros e identificadores estáticos, mas a dependência requer atualização antes de produção. A instalação reportou 10 vulnerabilidades totais (4 moderadas, 6 altas), incluindo desenvolvimento; não confundir com o único achado de produção.
+- Revisão estática: nenhuma consulta comercial exposta, nenhuma chave service-role enviada ao navegador, guarda servidor por UUID/MFA/sessão/registro ativo, consultas parametrizadas, origem obrigatória nas mutações, cookie HttpOnly e falha fechada. Não equivale a uma auditoria externa.
+- Não executados: login/MFA real, teste remoto de logout/revogação/rate limiting, conexão ao Supabase e deploy. Não há `.env.local` configurado neste workspace. Nenhuma migração executada.
+- Ativação e testes manuais: [admin-setup.md](admin-setup.md).

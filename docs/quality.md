@@ -25,3 +25,6 @@ Fonte versionada por caminho: `https://github.com/soumatheusgomes/vibe-coding-to
 Guia: `docs/tools/23-harness2.md` e `docs/prompts/15-harness-improvement.md` no repositório do toolkit, revisão `main` consultada 2026-10-19 (SHA pendente). Método: definir caso descartável → capturar evidência inicial → corrigir apenas falha observada em escopo autorizado → testar no mesmo input → manter somente melhoria comprovada. Não instalar harness2, chamar modelos externos ou mudar autenticação/faturamento.
 
 Casos iniciais aplicáveis: estrutura do projeto e guardas de endpoints (ver `scripts/validate-structure.mjs`); checagens reais de agente novo, Context7, browser, E2E e serviços estão **não executadas**. Para reuso: "Execute os casos do docs/quality.md e registre o resultado em docs/setup.md; adapte o harness apenas após falha observada, preservando modelo/cliente e escopo".
+
+## Testes administrativos adicionados
+`src/lib/admin-auth.test.ts`: token ausente/adulterado/expirado, AAL1, identidade inválida, permissão/sessão revogada, reconsulta sem cache, falha de banco, segredo no campo público e origem inválida. Mocks não substituem validação remota. Checklist remoto em [admin-setup.md](admin-setup.md).

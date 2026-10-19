@@ -69,3 +69,6 @@ Integração Hotmart segura com IDs reais, modelo de dados mínimo derivado de p
 
 ## Manutenção
 Revisar este escopo quando houver dados reais ou novas decisões. Ver arquitetura em `docs/architecture.md` e validações em `docs/setup.md`.
+
+## Atualização: acesso administrativo
+Login administrativo por Supabase Auth, senha e TOTP implementado no código. Depende de configuração e validação remota; não equivale à entrega de gestão de compradores/transações/PDFs. Configuração em [docs/admin-setup.md](docs/admin-setup.md). O login de clientes continua pendente e separado.

@@ -4,7 +4,7 @@
 O proprietário confirmou por consulta no Supabase o registro ativo do usuário em `borsamia_private.administrators`. A aplicação usa `user_id` e `revoked_at`, sem conceder acesso por comparação de e-mail. Nenhuma migração foi executada pelo agente.
 
 No Netlify, configure as variáveis para o runtime (Functions):
-- `SUPABASE_URL`: URL do projeto, por exemplo `https://xavmcflqtcudliyyrwzf.supabase.co`.
+- `SUPABASE_URL`: URL do seu projeto, copiada do painel Supabase. Mantenha o valor nas variáveis de ambiente; não o repita neste documento, pois o Netlify pode classificá-lo como segredo e bloquear o deploy.
 - `SUPABASE_PUBLISHABLE_KEY`: chave **publishable**, iniciada por `sb_publishable_`, obtida em Project Settings → API Keys. Essa chave é pública e é a única enviada ao formulário. Chaves secret/service-role não são aceitas nesse campo.
 - `DATABASE_URL`: conexão PostgreSQL já configurada. O papel servidor precisa ler `borsamia_private.administrators` e `auth.sessions`; nunca conceder esses privilégios a `anon`/`authenticated`.
 - `APP_BASE_URL`: origem HTTPS exata do site. Para desenvolvimento, `http://localhost:3000`. Não usar uma URL diferente da aberta no navegador.

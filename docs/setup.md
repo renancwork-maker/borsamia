@@ -68,3 +68,6 @@ Esta execução ocorreu no Windows, no workspace local BorsaMia; as limitações
 
 ## Páginas de produtos — validação local
 Criadas quatro páginas estáticas de entrada de produtos. ESLint dos arquivos alterados e `npm run build` passaram; build gerou `/prodotti/borse`, `/prodotti/fodere`, `/prodotti/club` e `/prodotti/portachiavi`. Sem publicação remota ou mudança em permissões/integrações.
+
+## Diagnóstico do deploy de produtos
+Deploy `6ad68780d72d53c4e7e743dd`, commit `539b712`, falhou no secrets scanning: o valor de SUPABASE_URL foi encontrado em docs/admin-setup.md. O build Next e as quatro páginas haviam sido gerados com sucesso. Produção permaneceu no commit anterior `2e85c90`, explicando o HTTP 404. Removido o valor concreto do documento, sem desativar o scanner. Correção local ainda requer envio ao GitHub e novo deploy. CLI local vinculada ao projeto borsamia somente para consultar logs; nenhum deploy iniciado nesta investigação.

@@ -3,10 +3,10 @@
 import { useState, type FormEvent } from "react";
 import { createClient } from "@supabase/supabase-js";
 
-export default function AdminLogin({ url, publishableKey }: { url: string; publishableKey: string }) {
-  const [client] = useState(() => createClient(url, publishableKey, {
+export default function AdminLogin({ url, publishableKey }: { url?: string; publishableKey?: string }) {
+  const [client] = useState(() => url && publishableKey ? createClient(url, publishableKey, {
     auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
-  }));
+  }) : null);
   const [factor, setFactor] = useState("");
   const [secret, setSecret] = useState("");
   const [message, setMessage] = useState("");
@@ -14,6 +14,7 @@ export default function AdminLogin({ url, publishableKey }: { url: string; publi
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!client) return;
     const form = new FormData(event.currentTarget);
     setBusy(true);
     setMessage("");
@@ -61,7 +62,8 @@ export default function AdminLogin({ url, publishableKey }: { url: string; publi
       <label htmlFor="admin-code">Codice dell’app di autenticazione</label>
       <input id="admin-code" name="code" inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{6}" maxLength={6} required />
     </>}
-    <button type="submit" disabled={busy}>{busy ? "Verifica in corso…" : factor ? "Verifica e accedi" : "Continua"}</button>
+    <button type="submit" disabled={busy || !client}>{busy ? "Verifica in corso…" : factor ? "Verifica e accedi" : "Continua"}</button>
+    {!client && <p role="status">Accesso temporaneamente non disponibile. La configurazione del servizio deve essere completata.</p>}
     <p role="status" aria-live="polite">{message}</p>
   </form>;
 }

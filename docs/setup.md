@@ -65,3 +65,6 @@ Esta execução ocorreu no Windows, no workspace local BorsaMia; as limitações
 - Revisão estática: nenhuma consulta comercial exposta, nenhuma chave service-role enviada ao navegador, guarda servidor por UUID/MFA/sessão/registro ativo, consultas parametrizadas, origem obrigatória nas mutações, cookie HttpOnly e falha fechada. Não equivale a uma auditoria externa.
 - Não executados: login/MFA real, teste remoto de logout/revogação/rate limiting, conexão ao Supabase e deploy. Não há `.env.local` configurado neste workspace. Nenhuma migração executada.
 - Ativação e testes manuais: [admin-setup.md](admin-setup.md).
+
+## Páginas de produtos — validação local
+Criadas quatro páginas estáticas de entrada de produtos. ESLint dos arquivos alterados e `npm run build` passaram; build gerou `/prodotti/borse`, `/prodotti/fodere`, `/prodotti/club` e `/prodotti/portachiavi`. Sem publicação remota ou mudança em permissões/integrações.

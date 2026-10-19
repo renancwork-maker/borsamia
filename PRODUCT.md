@@ -72,3 +72,11 @@ Revisar este escopo quando houver dados reais ou novas decisões. Ver arquitetur
 
 ## Atualização: acesso administrativo
 Login administrativo por Supabase Auth, senha e TOTP implementado no código. Depende de configuração e validação remota; não equivale à entrega de gestão de compradores/transações/PDFs. Configuração em [docs/admin-setup.md](docs/admin-setup.md). O login de clientes continua pendente e separado.
+
+## Endereços individuais dos produtos
+Páginas públicas de entrada implementadas, com conteúdo privado ainda fechado:
+- `/prodotti/borse`: produto principal BorsaMia.
+- `/prodotti/fodere`: Manuale di Fodere per Borse all’Uncinetto.
+- `/prodotti/club`: Club delle Tendenze all’Uncinetto.
+- `/prodotti/portachiavi`: coleção de chaveiros, sem quantidade no endereço/título enquanto 21 versus 37 não estiver confirmado.
+Esses slugs são endereços de navegação, não IDs Hotmart. A oferta recente informa quatro bumps, mas identifica apenas três; não foi inventada uma página para o quarto. O catálogo visual original de seis coleções permanece até reconciliação comercial. Essas páginas não concedem permissões, não entregam PDFs e encaminham à página de login de clientes, ainda indisponível. Após login real, o retorno ao produto deverá ser integrado; nesta etapa o link vai para `/accedi`.

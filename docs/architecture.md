@@ -41,3 +41,6 @@ Sem npm/cache de pacotes ou acesso ao repositório no terminal disponível; cons
 
 ## Atualização: autenticação administrativa
 Implementados `/admin/accedi`, `/admin` e `/api/admin/session`: Supabase Auth com senha + TOTP e guarda servidor para identidade, AAL2, sessão e administrador ativo. Painel inicial sem dados comerciais. Configuração, revogação e limitações em [admin-setup.md](admin-setup.md). Não houve migração nem publicação nesta entrega.
+
+## Páginas individuais de produto
+`/prodotti/[slug]` gera quatro páginas estáticas a partir de `productPages` em `src/lib/catalog.ts`. Slugs desconhecidos retornam 404. São metadados públicos; não há leitura de banco nem concessão de permissões. Endereços canônicos e pendências comerciais em [PRODUCT.md](../PRODUCT.md).

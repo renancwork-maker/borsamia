@@ -16,3 +16,11 @@ export const collections: readonly Collection[] = [
   { id: "bambini", title: "Neonati e bambini", subtitle: "Modelli da 0 a 5 anni", count: 101, theme: "rose", symbol: "🧸" },
   { id: "fodere", title: "Fodere e finiture", subtitle: "Manuale pratico per borse", count: null, theme: "sand", symbol: "🪡" },
 ] as const;
+
+/** Stable customer entry pages, not Hotmart SKU mappings or entitlements. */
+export const productPages = [
+  { slug: "borse", title: "BorsaMia — Borse all’uncinetto", description: "La collezione principale di borse all’uncinetto." },
+  { slug: "fodere", title: "Manuale di Fodere per Borse all’Uncinetto", description: "Il manuale dedicato alle fodere e alle finiture delle tue borse." },
+  { slug: "club", title: "Club delle Tendenze all’Uncinetto", description: "Lo spazio dedicato ai contenuti dell’abbonamento al Club." },
+  { slug: "portachiavi", title: "Collezione di Portachiavi all’Uncinetto", description: "La collezione dedicata ai tuoi piccoli progetti all’uncinetto." },
+] as const;

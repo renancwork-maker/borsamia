@@ -18,3 +18,7 @@ A página pública de Yarnl demonstra biblioteca, filtros, projetos, favorito e 
 
 ## Atualização administrativa
 `/admin/accedi`: formulário IT-IT com e-mail/senha, cadastro de autenticador por chave TOTP e verificação de seis dígitos. `/admin`: confirmação de acesso e logout, com estado honesto de ausência de módulos comerciais. Reutiliza estilos de login existentes.
+
+Correção de apresentação: os campos de e-mail e senha permanecem visíveis quando faltam variáveis de ambiente; o botão Continuar fica desabilitado com mensagem IT-IT de indisponibilidade. Nenhuma chamada de autenticação ocorre nesse estado. É necessário configurar as quatro variáveis documentadas e publicar novamente para habilitar o envio.
+
+Páginas `/prodotti/borse`, `/prodotti/fodere`, `/prodotti/club` e `/prodotti/portachiavi`: título IT-IT, descrição breve, informação de acesso restrito, estado de integração pendente e link para login. Reutilizam apresentação do login e não simulam arquivos disponíveis.

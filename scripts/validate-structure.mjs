@@ -1,0 +1,10 @@
+import assert from "node:assert/strict";
+import { readFileSync, existsSync } from "node:fs";
+const required = ["README.md", "PRODUCT.md", "AGENTS.md", "CLAUDE.md", "docs/architecture.md", "docs/design.md", "docs/onboarding.md", "docs/quality.md", "docs/setup.md", "netlify.toml", ".env.example", "src/app/page.tsx", "src/app/accedi/page.tsx", "src/app/api/hotmart/webhook/route.ts"];
+for (const file of required) assert.ok(existsSync(file), `Missing ${file}`);
+const src = readFileSync("src/app/api/hotmart/webhook/route.ts", "utf8");
+assert.match(src, /status: 503/);
+assert.ok(!src.includes("INSERT INTO"), "No unvalidated purchase writes");
+const p = JSON.parse(readFileSync("package.json", "utf8"));
+assert.equal(p.dependencies.next, "16.4.2");
+process.stdout.write(`Structure: ${required.length} expected files OK; API closed until configured.\n`);

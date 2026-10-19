@@ -1,0 +1,48 @@
+{
+  "name": "borsamia",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "lint:typed": "eslint --config eslint.typed.config.mjs .",
+    "lint:rules": "node scripts/verify-quality-rules.mjs",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "check": "npm run lint && npm run typecheck && npm run lint:typed && npm run lint:rules && npm test && npm run build",
+    "check:offline": "node scripts/validate-structure.mjs"
+  },
+  "dependencies": {
+    "next": "16.4.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "drizzle-orm": "^0.44.0",
+    "pg": "^8.16.0",
+    "zod": "^4.1.0",
+    "pino": "^10.0.0",
+    "server-only": "^0.0.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/pg": "^8.15.0",
+    "@next/env": "16.4.2",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "16.4.2",
+    "eslint-plugin-drizzle": "^0.2.3",
+    "typescript-eslint": "^8.0.0",
+    "@tailwindcss/postcss": "^4.1.0",
+    "tailwindcss": "^4.1.0",
+    "vitest": "^4.0.0",
+    "drizzle-kit": "^0.31.0"
+  }
+}

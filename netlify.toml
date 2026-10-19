@@ -1,0 +1,12 @@
+# Next.js is detected automatically and deployed via Netlify OpenNext.
+# Do not add a SPA catch-all rewrite: it would break Next.js route handlers.
+[build]
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Cache-Control = "no-store"

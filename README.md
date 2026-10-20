@@ -1,35 +1,29 @@
-# BorsaMia — La tua biblioteca creativa
+# BorsaMia · La tua biblioteca creativa
 
-Base inicial (bootstrap) de webapp de crochê em italiano, inspirada nas funcionalidades de organização do Yarnl e preparada para publicação na Netlify. **Ainda não é um app comercial pronto para produção.** O acesso pela Hotmart, Supabase e conteúdo protegido precisam ser implementados e validados.
+Webapp Next.js 16 para conteúdos digitais de crochê, hospedável na **Netlify**.
+A interface para consumidores é 100% em **italiano**. O painel de acesso usa validação de sessão Supabase, e as permissões de cada coleção são geradas a partir de eventos Hotmart verificados no servidor.
 
-## Preparação local
-Requer Node.js 22+, npm e conexão com npm registry. Após extrair a pasta:
+## Produtos configurados
 
-```bash
-npm install
-npm run dev
-```
+| Produto | Hotmart | Página |
+|---|---|---|
+| 101 bolsas all’uncinetto | `8765000` | `/prodotti/borse` |
+| Manuale di fodere | `8765113` | `/prodotti/fodere` |
+| Club delle Tendenze (assinatura) | `8765856` | `/prodotti/club` |
+| 37 portachiavi all’uncinetto | `8766213` | `/prodotti/portachiavi` |
 
-Abra `http://localhost:3000`. Para checks completos (depois de instalar dependências):
+## Como começar
 
-```bash
-npm run check
-```
+1. Em Windows/macOS/Linux, instale Node 22+ e execute `npm ci` para instalar binários corretos para seu sistema.
+2. Para desenvolvimento local: configure `.env.local` baseado em `.env.example` (sem compartilhar segredos). Execute `npm run dev`.
+3. **Antes de ativar webhooks:** leia [`docs/hotmart-setup.md`](docs/hotmart-setup.md) na íntegra. Contém SQL novo e de upgrade, bucket privado, Supabase Auth, Hottok, testes de compras e deploy Netlify.
+4. Para validação: `npm run typecheck && npm test && npm run lint && npm run build`.
+5. Publique pela integração GitHub/Netlify e configure as variáveis de ambiente do site; não use static export.
 
-Para validar somente estrutura sem instalar pacotes: `npm run check:offline`.
+## Estado do material entregue
 
-## Deployment Netlify
-Conecte o repositório à Netlify e use o framework Next.js reconhecido automaticamente; `netlify.toml` define `npm run build` e Node 22. O adaptador OpenNext gerencia funções para App Router/route handlers. Não criar redirecionamento SPA global. Inserir segredos privados na Netlify (NÃO no Git) somente quando os serviços estiverem configurados. Não faça deploy comercial antes do webhook, autenticação, storage e testes de acesso reais.
+A interface visual, página de cada produto, mecanismo de ingestão e de permissões, proteção de arquivos e estrutura para o Club foram corrigidos a partir do ZIP fornecido. **Não foram fornecidos os PDFs reais, os 101 modelos, os 37 modelos de chaveiros, os tutoriais do manual ou as novidades mensais.** As quatro fotografias são ilustrações editoriais e não ilustram precisamente os produtos adquiridos. Faça upload dos arquivos e cadastre os metadados no banco antes de publicar vendas.
 
-## Estado atual
-- Dashboard com 6 coleções e busca em IT-IT; estado de acesso fechado por padrão.
-- Tela `/accedi`; `/api/access/request` devolve 503, sem e-mail enviado.
-- `/api/hotmart/webhook` devolve 503, sem registrar transações.
-- `/api/library/:collectionId` devolve 401; nenhum PDF público.
-- Modelo inicial de domínio comercial testável sem payloads ou IDs inventados.
+**Os webhooks não foram implantados nem testados contra sua conta Hotmart real.** Testes locais não equivalem à prova de um fluxo de produção; valide pagamentos, cancelamentos, atrasos de assinatura e segurança após instalar as dependências e configurar os serviços.
 
-## Documentação
-`PRODUCT.md` (escopo/cenários), `AGENTS.md` (instruções de desenvolvimento), `docs/architecture.md` (decisões e fronteiras), `docs/design.md` (UI/Italiano), `docs/onboarding.md` (preparação local), `docs/quality.md` (testes e revisão) e `docs/setup.md` (evidências/pendências).
-
-## Origem
-Base planejada a partir do Vibe Coding Toolkit (prompt `11-next-project-bootstrap.md`). Este arquivo é um scaffold manual parcial, não uma instalação completa do toolkit; veja `docs/setup.md` para o motivo e os componentes ainda pendentes.
+O fluxo de assinatura é conservador: precisa de evidência do próximo pagamento no evento autenticado (`purchase.date_next_charge`) para conceder o Club. Enquanto o evento real não comprovar o período, a compra fica sinalizada para reconciliação e o Club permanece fechado por segurança.

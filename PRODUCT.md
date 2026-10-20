@@ -1,82 +1,28 @@
-# BorsaMia — La tua biblioteca creativa
+# BorsaMia — definizione commerciale e funzionale
 
-## Problema e objetivo
-O público de crochê na Itália encontra modelos, diagramas e PDFs dispersos e dificuldade para registrar projetos e progresso. O BorsaMia reunirá receitas, biblioteca personalizada, leitura e acompanhamento em um ambiente premium e responsivo. Não é uma landing page nem uma lista pública de downloads.
+Il sito e tutte le interfacce rivolte al cliente sono **esclusivamente in italiano (it-IT)**.
+Questo repository contiene quattro prodotti confermati; altri prodotti non vanno attivati senza ID e materiali verificati.
 
-## Público e papéis
-- **Cliente:** principalmente mulheres adultas na Itália; iniciantes, artesãs intermediárias e produtoras de peças para uso, presente ou venda. Login por e-mail comprovado, sem senha nem OTP digitado.
-- **Administradora:** gerencia produtos, arquivos, compradores, transações e eventos; autenticação separada e reforçada.
+| ID Hotmart | Produttto | ID interno | Pagina | Regola |
+|---|---|---|---|---|
+| 8765000 | Collezione di 101 Modelli di Borse all’Uncinetto | borse | /prodotti/borse | acquisto singolo |
+| 8765113 | Manuale di Fodere per Borse all’Uncinetto | fodere | /prodotti/fodere | acquisto singolo |
+| 8765856 | Club delle Tendenze all’Uncinetto | club | /prodotti/club | abbonamento mensile, accesso solo durante il periodo verificato |
+| 8766213 | Collezione di 37 Modelli di Portachiavi all’Uncinetto | portachiavi-37 | /prodotti/portachiavi | acquisto singolo |
 
-## Produtos e identidade comercial
-Cada item é uma coleção vendida separadamente na Hotmart. Identificadores comerciais reais e URLs de checkout ainda estão **pendentes**; IDs internos abaixo são identificadores de interface, não IDs da Hotmart.
+## Contenuti promessi
 
-| ID interno | Produto (IT-IT) | Quantidade |
-|---|---|---:|
-| `borse` | BorsaMia — Collezione di 101 Modelli di Borse all'Uncinetto | 101 |
-| `portachiavi-37` | Collezione di 37 Modelli di Portachiavi all'Uncinetto | 37 |
-| `portachiavi-21` | Collezione di 21 Modelli di Portachiavi all'Uncinetto | 21 |
-| `macrame` | Collezione di 47 Modelli di Borse in Macramè | 47 |
-| `bambini` | Collezione di 101 Modelli all'Uncinetto per Neonati e Bambini da 0 a 5 Anni | 101 |
-| `fodere` | Manuale di Fodere per Borse all'Uncinetto | Sem contagem de modelos |
+- Borse: biblioteca di 101 modelli digitali, consultabili nell’app.
+- Fodere: manuale di misure, cerniere, tasche, rinforzi e tutorial visivi.
+- Club: abbonamento mensile, 12 nuovi modelli al mese, tra borse, accessori, abbigliamento e progetti stagionali. Le condizioni economiche sono mostrate in checkout.
+- Portachiavi: raccolta digitale di 37 schemi. **Non** 21.
 
-## Fluxos da versão inicial
-1. **Compra:** Hotmart envia compra aprovada; backend valida autenticidade, normaliza evento, deduplica por identificador real, grava transação e concede permissão individual. Eventos podem chegar separadamente e fora de ordem.
-2. **Login:** cliente informa e-mail da compra, recebe link de uso único com expiração, confirma a titularidade e obtém sessão segura em cookie HttpOnly. Sem senha, cadastro ou código digitado.
-3. **Permissões:** compras aprovadas de diferentes produtos acumulam; reembolso, cancelamento ou chargeback removem apenas acesso da transação atingida; outra transação ativa do mesmo produto pode mantê-lo. Reconciliação deve consultar estado real quando necessário.
-4. **Biblioteca:** coleções adquiridas, não adquiridas bloqueadas, busca, filtros, favoritos, projetos em andamento/concluídos, último modelo e progresso.
-5. **Detalhe:** capa, texto em italiano, materiais, medidas, instruções, PDF protegido, páginas e zoom, contador de carreiras, favoritos e conclusão.
-6. **Admin:** login próprio, compradores, transações, permissões manuais auditadas, uploads e classificação, mapeamento Hotmart e falhas de eventos.
+Le raccolte aggiuntive e il Club sono venduti separatamente. Il servizio è solo digitale, senza consegna di articoli fisici.
 
-## MVP priorizado (trabalho pós-bootstrap)
-1. Mapeamento real produto Hotmart → coleção (incluindo os cinco order bumps); ingestão segura, armazenamento idempotente, reconciliação e testes de revogação.
-2. E-mail da compra → magic link sem OTP → sessão segura; proteção anti-enumeração, expiração e limite de envio.
-3. Biblioteca por permissões e entrega de PDFs privados após autorização do servidor.
-4. Modelos e progresso (favoritos, contador, concluídos) persistidos.
-5. Painel administrativo protegido para conteúdo e suporte.
-6. Testes E2E, revisão de segurança, conexão Netlify/Supabase e publicação autorizada.
+## Stato del repository
 
-## Estado efetivamente criado neste bootstrap
-- Interface inicial responsiva em italiano com as seis coleções, pesquisa local e navegação ilustrativa; **todas bloqueadas** sem sessão. Imagens são ilustrações/emoji provisórios, não fotografias nem PDFs reais.
-- Formulário de acesso com validação e resposta de indisponibilidade **503**: não envia e-mail nem valida compra ainda.
-- Endpoint de webhook responde **503** e não altera o banco. Endpoint de arquivos responde **401**. Permissões unit-testadas em função pura sobre transações já verificadas/normalizadas.
-- Infraestrutura de Next.js, Netlify, Drizzle/PostgreSQL e documentação preparada. Sem migrations de negócio nem acesso a Supabase.
+L’interfaccia e il livello tecnico per notifiche Hotmart, controllo accessi e file protetti sono implementati. **Non sono inclusi i PDF, le 101 istruzioni, i 37 schemi, i tutorial, né i 12 schemi mensili reali**: caricarli nel bucket privato prima di vendere. Le foto presenti sono **illustrazioni** e non provano i contenuti reali. Credenziali e database di produzione, storage e deploy devono essere configurati esternamente.
 
-## Requisitos e restrições
-- **Idioma:** 100% dos textos visíveis ao cliente em italiano (IT-IT), inclusive mensagens e e-mails. PDFs só publicados com versão italiana validada; nunca inventar tradução.
-- **Host:** Netlify, sem processo Node persistente; Next.js 16 App Router com adaptador OpenNext oficial; rotas Next são hospedadas como funções serverless. Escolha deliberada pelo guia de bootstrap Next.js e compatibilidade Netlify, em lugar da preferência não obrigatória React/Vite.
-- **Persistência:** Supabase PostgreSQL com Drizzle ORM + driver `pg`; limite de pool de conexões e conexão lazy. Storage privado Supabase após configuração. Sem segredos `NEXT_PUBLIC_*`.
-- **Proteção:** permissões no backend, cookies seguros HttpOnly, arquivos nunca públicos, links assinados curtos depois da autorização; logs sem dados sensíveis; webhook autenticado, idempotente e reprocessável.
-- **UI:** inspiração nos fluxos de Yarnl (biblioteca, progresso, PDF), sem copiar código, marca ou imagens. A demonstração não foi autenticada nesta execução.
-- **Desempenho:** mobile-first, imagens otimizadas, lazy loading, PDF navegável e retenção do progresso.
-- **Expansão:** produtos/coleções dirigidos por configuração de banco e IDs reais, sem `if` para combinações fixas de order bumps.
+## Sicurezza
 
-## Hipóteses reversíveis e decisões pendentes
-- **Hipótese reversível:** dashboard começa com coleção não autenticada visível e bloqueada; durante o MVP, ajustar visibilidade pós-login e o percurso de compra.
-- **Pendente indispensável:** credenciais da Hotmart, configuração de webhook, amostra real de payload com dados sensíveis removidos, identificadores dos seis produtos e tratamento do principal/order bump conforme eventos observados.
-- **Pendente indispensável:** projeto Supabase e configurações de conexão/Storage, domínio Netlify, remetente e provedor de e-mail, política de sessão, autenticação administrativa, links autorizados para compra, fotos e PDFs italianos licenciados.
-- **Segurança:** antes da verificação de titularidade, evitar distinção explícita entre e-mail inexistente e existente para limitar enumeração; após acesso legítimo, pode-se dar informação específica.
-
-## Critérios de aceitação do produto (AINDA NÃO cumpridos)
-- Uma transação aprovada real para cada SKU correto adiciona uma coleção; qualquer combinação de bumps libera exatamente a união das coleções válidas, independentemente da ordem dos eventos.
-- Duplicatas são idempotentes; chargeback/reembolso/cancelamento retiram acesso só da transação afetada; outra compra ativa permanece; webhooks falsos não alteram acesso.
-- Inserir o e-mail de outra pessoa não dá sessão; apenas uso do link com expiração entregue ao titular autentica; sessão respeita expiração e logout.
-- Sem permissão, APIs e arquivos permanecem inacessíveis mesmo conhecendo URLs. Links temporários expiram.
-- Cliente em celular pode filtrar, ler PDF, avançar páginas, atualizar contador e retomar projeto, com progresso persistido.
-- Admin separada pode cadastrar PDF em italiano e auditar eventos; placeholders e PDFs sem tradução não aparecem como conteúdo vendido.
-
-## Próxima entrega
-Integração Hotmart segura com IDs reais, modelo de dados mínimo derivado de payload confirmado e testes de ingestão/deduplicação/reembolso, antes de implementar login e PDFs.
-
-## Manutenção
-Revisar este escopo quando houver dados reais ou novas decisões. Ver arquitetura em `docs/architecture.md` e validações em `docs/setup.md`.
-
-## Atualização: acesso administrativo
-Login administrativo por Supabase Auth, senha e TOTP implementado no código. Depende de configuração e validação remota; não equivale à entrega de gestão de compradores/transações/PDFs. Configuração em [docs/admin-setup.md](docs/admin-setup.md). O login de clientes continua pendente e separado.
-
-## Endereços individuais dos produtos
-Páginas públicas de entrada implementadas, com conteúdo privado ainda fechado:
-- `/prodotti/borse`: produto principal BorsaMia.
-- `/prodotti/fodere`: Manuale di Fodere per Borse all’Uncinetto.
-- `/prodotti/club`: Club delle Tendenze all’Uncinetto.
-- `/prodotti/portachiavi`: coleção de chaveiros, sem quantidade no endereço/título enquanto 21 versus 37 não estiver confirmado.
-Esses slugs são endereços de navegação, não IDs Hotmart. A oferta recente informa quatro bumps, mas identifica apenas três; não foi inventada uma página para o quarto. O catálogo visual original de seis coleções permanece até reconciliação comercial. Essas páginas não concedem permissões, não entregam PDFs e encaminham à página de login de clientes, ainda indisponível. Após login real, o retorno ao produto deverá ser integrado; nesta etapa o link vai para `/accedi`.
+Non basta conoscere l’e-mail di un altro acquirente. L’accesso richiede un link al titolare dell’e-mail, una sessione verificata sul server e una autorizzazione derivata da webhook autenticati. Ogni PDF è protetto anche dal backend. Le notifiche con `product.id = 0` sono sandbox e non liberano contenuti. Le notifiche prive di un periodo pagato verificabile per il Club restano in revisione invece di concedere accesso.

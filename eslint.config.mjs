@@ -17,5 +17,6 @@ export default defineConfig([
   { files: ["**/*.{js,jsx,ts,tsx,mjs,cjs}"], plugins: { quality }, rules: {
     "quality/max-lines": ["error", { max: 350 }],
   } },
+  { files: ["eslint-rules/**/*.cjs"], rules: { "@typescript-eslint/no-require-imports": "off" } },
   globalIgnores([".next/**", "out/**", "build/**", "coverage/**", "next-env.d.ts", ".agents/**", ".claude/**", "graphify-out/**"]),
 ]);

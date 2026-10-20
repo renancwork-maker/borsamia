@@ -16,9 +16,10 @@ A interface para consumidores é 100% em **italiano**. O painel de acesso usa va
 
 1. Em Windows/macOS/Linux, instale Node 22+ e execute `npm ci` para instalar binários corretos para seu sistema.
 2. Para desenvolvimento local: configure `.env.local` baseado em `.env.example` (sem compartilhar segredos). Execute `npm run dev`.
-3. **Antes de ativar webhooks:** leia [`docs/hotmart-setup.md`](docs/hotmart-setup.md) na íntegra. Contém SQL novo e de upgrade, bucket privado, Supabase Auth, Hottok, testes de compras e deploy Netlify.
-4. Para validação: `npm run typecheck && npm test && npm run lint && npm run build`.
-5. Publique pela integração GitHub/Netlify e configure as variáveis de ambiente do site; não use static export.
+3. **Boas-vindas automáticas:** execute `docs/sql/003-resend-welcome.sql` após a migração inicial, e siga [`docs/RESEND-AUTOMATICO.md`](docs/RESEND-AUTOMATICO.md) para configurar Resend, SMTP de login Supabase, ativação e testes.
+4. **Antes de ativar webhooks:** leia [`docs/hotmart-setup.md`](docs/hotmart-setup.md) na íntegra. Contém SQL novo e de upgrade, bucket privado, Supabase Auth, Hottok, testes de compras e deploy Netlify.
+5. Para validação: `npm run typecheck && npm test && npm run lint && npm run build`.
+6. Publique pela integração GitHub/Netlify e configure as variáveis de ambiente do site; não use static export.
 
 ## Estado do material entregue
 

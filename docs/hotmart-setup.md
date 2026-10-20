@@ -12,6 +12,8 @@
 6. A view `current_entitlements` calcula acessos pelas transações de compra aprovadas, sem pagamentos reembolsados ou chargebacks. Cada Order Bump gera sua própria transação, sem ativar os demais produtos.
 7. O Club só fica disponível quando um webhook aprovado, com `subscription.status=ACTIVE`, `subscription.subscriber.code` e `purchase.date_next_charge` futuro, comprovar o ciclo pago. Um evento de mera mudança de data não libera nem renova o Club. Cancelamentos sem reembolso não ampliam o período pago; expira na data de renovação verificada. Se a Hotmart real não enviar `date_next_charge` na aprovação, o evento ficará `needs_reconciliation` e você precisará ajustar a integração conforme o evento real/API oficial, antes de vender a assinatura.
 
+Após aplicar `001-hotmart.sql`, execute também `docs/sql/003-resend-welcome.sql` antes de publicar a integração Resend. Leia `docs/RESEND-AUTOMATICO.md` para os passos de SMTP e e-mails de boas-vindas.
+
 ## B. Conteúdos digitais
 
 1. Supabase → Storage → crie bucket **privado** chamado exatamente `borsamia-content` (public OFF).
@@ -41,6 +43,8 @@ SUPABASE_SERVICE_ROLE_KEY=<chave-service-role-servidor>
 HOTMART_WEBHOOK_SECRET=<HOTTOK-REAL-DA-HOTMART>
 HOTMART_WEBHOOK_ENABLED=true
 CUSTOMER_ACCESS_ENABLED=true
+RESEND_API_KEY=<chave-do-resend>
+RESEND_FROM=BorsaMia <accesso@digitalco.site>
 ```
 
 Ative as duas flags `true` **somente depois** que o SQL, os conteúdos, a autenticação e os testes tiverem passado. No início deixe `false`. Jamais use variáveis `NEXT_PUBLIC_` para credenciais. Redeploy após alterar variáveis.

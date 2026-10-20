@@ -3,6 +3,7 @@ import { authenticHotmart, parseHotmart } from "@/lib/hotmart-event";
 import { consumeLimit, ingestHotmart } from "@/lib/hotmart-store";
 import { limitedJson } from "@/lib/request-body";
 import { logger } from "@/lib/logger";
+import { deliverWelcomeForEvent } from "@/lib/welcome-delivery";
 
 export const runtime = "nodejs";
 const headers = { "Cache-Control": "no-store" };
@@ -28,10 +29,12 @@ export async function POST(request: Request) {
       });
     }
     const disposition = await ingestHotmart(event);
-    logger.info({ eventId: event.id, disposition }, "Hotmart event persisted");
+    // On a replay, delivery is retried even if the purchase event was already stored.
+    const delivery = await deliverWelcomeForEvent(event);
+    logger.info({ eventId: event.id, disposition, delivery }, "Hotmart event processed");
     return NextResponse.json({ received: true }, { headers });
   } catch {
-    logger.error({ eventId: event.id }, "Hotmart persistence unavailable");
+    logger.error({ eventId: event.id }, "Hotmart processing unavailable; provider may retry");
     return NextResponse.json({ error: "Servizio non disponibile" }, { status: 503, headers });
   }
 }

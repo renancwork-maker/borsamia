@@ -1,0 +1,35 @@
+BORSA MIA — NOVA VERSAO: HOTMART + RESEND
+=======================================
+
+1. Execute docs/sql/003-resend-welcome.sql no SQL Editor do Supabase.
+   Nao execute 001-hotmart.sql outra vez.
+
+2. Confira as variaveis Netlify:
+   APP_BASE_URL, DATABASE_URL, SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY,
+   HOTMART_WEBHOOK_SECRET, RESEND_API_KEY, RESEND_FROM.
+
+3. Variaveis ADICIONAIS para conferir/cadastrar:
+   HOTMART_WEBHOOK_ENABLED=true
+   CUSTOMER_ACCESS_ENABLED=true
+   SUPABASE_SERVICE_ROLE_KEY=<chave real do Supabase, somente servidor>
+
+   Habilite o webhook somente apos aplicar SQL e validar a URL Hotmart.
+   Habilite o login somente apos configurar o Supabase Auth e SMTP.
+   A service role e necessaria para URLs privadas de arquivos digitais.
+
+4. O Resend na Netlify envia as boas-vindas. O Supabase Auth envia
+   os MAGIC LINKS e precisa de SMTP configurado SEPARADAMENTE:
+   Host smtp.resend.com, usuario resend, senha chave API Resend,
+   remetente accesso@digitalco.site. Ver docs/RESEND-AUTOMATICO.md.
+
+5. Publique o CODIGO-FONTE como projeto Next.js usando Git/Netlify,
+   mantenha o build npm run build. Nao publique esse ZIP como HTML estatico.
+
+6. O bucket privado borsamia-content precisa conter os materiais reais.
+   Produtos sem arquivo cadastrado nao ficam disponiveis para download.
+
+7. TESTE: webhook de compra aprovada e order bump; confira a view
+   current_entitlements, tabela welcome_deliveries e logs do Resend.
+
+Consulte docs/RESEND-AUTOMATICO.md para orientacoes detalhadas.
+Nao envie chaves, senhas nem tokens em screenshots ou no chat.

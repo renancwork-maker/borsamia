@@ -1,3 +1,5 @@
+> **ATTENZIONE — nuova versione senza magic link**: la procedura di accesso descritta più sotto è storica. Per configurare la nuova versione con codice numerico, seguire `LEIA-PRIMEIRO-ACESSO-SEM-LINK.txt` e `docs/FLUXO-ACCESSO-SEM-LINK.md`.
+
 # Ativação BorsaMia — Hotmart, Supabase e Netlify
 
 **Leia antes de colocar à venda.** Este ZIP é código corrigido, não um deploy executado. Não foram fornecidos o banco Supabase, credenciais reais, Hotmart de produção nem os PDFs. Os IDs informados pelo proprietário foram adotados sem confirmação externa.

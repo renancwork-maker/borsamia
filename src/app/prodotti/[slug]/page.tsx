@@ -6,6 +6,7 @@ import { authorizeCustomer, customerCookie } from "@/lib/customer-auth";
 import { purchasedCollections } from "@/lib/hotmart-store";
 import { collectionFiles } from "@/lib/collection-files";
 import { findProduct, productPages } from "@/lib/catalog";
+import SessionRestorer from "@/components/session-restorer";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -28,6 +29,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     }
   } catch { unavailable = true; }
   return <div className="product-layout">
+    {!authenticated && <SessionRestorer />}
     <header className="product-header"><Link href="/" className="brand-text">Borsa<span>Mia</span></Link>
       <nav aria-label="Navigazione"><Link href="/biblioteca">La mia biblioteca</Link><Link className="header-access" href="/accedi">Accedi</Link></nav>
     </header>

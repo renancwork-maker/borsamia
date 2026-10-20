@@ -1,0 +1,75 @@
+BORSA MIA - NOVA VERSAO: EMAIL DE COMPRA VIA RESEND + CODIGO NUMERICO PARA LOGIN
+
+IMPORTANTE - o sistema NAO permite acesso apenas digitando o email em um navegador novo.
+Isso possibilitaria que qualquer pessoa abrisse os produtos de outro comprador.
+
+COMO FICA A EXPERIENCIA:
+1. A Hotmart confirma uma compra. O webhook valida o hottok, atualiza o banco e
+   envia pelo Resend um email em italiano com os produtos confirmados, incluindo
+   os order bumps ja confirmados naquele momento. Compras adicionais notificadas
+   depois podem gerar outro email com a biblioteca atualizada.
+2. No primeiro acesso EM UM NAVEGADOR NOVO, cliente digita o email e informa o
+   codigo de 6 digitos recebido via Resend SMTP do Supabase. NAO recebe link.
+3. O navegador recebe cookies HttpOnly/Secure de sessao e renovacao. Enquanto
+   a sessao estiver valida, o cliente volta e entra na biblioteca diretamente,
+   sem receber novos links ou codigos a cada visita.
+4. Os arquivos protegidos continuam sob verificacao de identidade + compras
+   pagas em cada requisicao. Reembolsos e assinatura encerrada removem acesso.
+5. Botao 'Esci' limpa os cookies quando o cliente usar computador compartilhado.
+
+CONFIGURAR NO SUPABASE (OBRIGATORIO PARA CODIGO EM VEZ DE LINK):
+Authentication > Email Templates > Magic Link
+- Subject: Il tuo codice di accesso a BorsaMia
+- Body: usar o HTML do arquivo docs/TEMPLATE-EMAIL-CODICE-SUPABASE.html
+A chave do template e {{ .Token }}, NAO {{ .ConfirmationURL }}.
+IMPORTANTE: Configurar igualmente o template 'Confirm signup' para contas novas,
+pois primeiro acesso pode criar usuario pelo Supabase Auth.
+Se ainda existir um template enviando link para login, essa configuracao nao foi
+aplicada a todos os tipos de autenticacao usados.
+
+SUPABASE SMTP (ja configurado pelo usuario):
+  Host smtp.resend.com | port 465 | username resend
+  Remetente BorsaMia <accesso@digitalco.site>
+  Password: API Key do Resend; NAO colocar senha no codigo/arquivo.
+
+SUPABASE URL Configuration:
+  Site URL: https://borsamia.netlify.app
+  Redirect URLs: https://borsamia.netlify.app/**
+
+NETLIFY Environment variables (deverao estar presentes):
+  APP_BASE_URL=https://borsamia.netlify.app
+  DATABASE_URL=(URI PostgreSQL REAL, protegida)
+  CUSTOMER_ACCESS_ENABLED=true
+  HOTMART_WEBHOOK_ENABLED=true (somente depois de confirmar URL e assinatura)
+  HOTMART_WEBHOOK_SECRET=(hottok correto)
+  SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY
+  SUPABASE_SERVICE_ROLE_KEY=(necessaria para PDFs privados)
+  RESEND_API_KEY=(chave para emails transacionais do webhook)
+  RESEND_FROM=BorsaMia <accesso@digitalco.site>
+
+SQL: O SQL 001 e o SQL 003 ja foram executados nas etapas anteriores.
+NAO PRECISA criar novas tabelas nem reexecutar os scripts.
+
+PUBLICACAO:
+Enviar ESTE CODIGO para o mesmo repositorio GitHub integrado na Netlify;
+executar novo deploy. Alterar somente variaveis em Netlify nao atualiza o codigo.
+O ZIP e um projeto Next.js fonte, NAO um site estatico HTML: ele deve ser
+implantado atraves de build Next.js com integracao Netlify.
+
+TESTES NECESSARIOS ANTES DE USAR COM CLIENTES:
+- Primeiro acesso: recebe email com CODIGO NUMERICO (nao URL); digita codigo;
+  abre /biblioteca com somente os itens comprados.
+- Nova visita MESMO navegador: abre sem novo email.
+- Outro navegador: exige novo codigo.
+- Email de cliente inexistente: nunca libera biblioteca.
+- Hotmart: evento valido, assinatura correta, nao enviar por evento falso;
+  order bumps e reembolsos; evitar duplicacao ao repetir evento.
+- Supabase: arquivos privados carregados em borsamia-content.
+
+SEGURANCA:
+NUNCA compartilhe API keys, senha de banco, Hottok, OTP ou cookies em prints.
+Revogue qualquer magic link anterior contendo token compartilhado publicamente.
+Se uma senha de PostgreSQL ja tiver aparecido em prints, redefina no Supabase e
+atualize a DATABASE_URL da Netlify.
+
+NOTA: Ainda nao testamos esta nova versao em producao, nem fizemos uma compra real.

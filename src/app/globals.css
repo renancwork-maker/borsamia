@@ -84,3 +84,12 @@ button:focus-visible,a:focus-visible,input:focus-visible {outline:3px solid #b77
 @media(max-width:650px){.product-header{padding:15px 19px}.brand-text{font-size:27px}.product-header nav{gap:12px}.product-header nav a{font-size:11px}.product-header .header-access{padding:9px 12px}.product-copy h1{font-size:35px}.product-lead{font-size:22px}.product-materials{margin-top:42px}.library-grid,.asset-grid{grid-template-columns:1fr}.library-card-cover{height:235px}.library-main{padding-top:25px}.library-filter{flex-wrap:wrap}.home-heading{display:block}.home-heading .searchbox{margin-top:17px}.home-hero>div{padding:30px 25px}.picture-tag{font-size:10px}.product-primary{width:100%}.product-footer{gap:12px}.materials-empty{padding:25px 19px}}
 
 .login-art{background:linear-gradient(180deg,#52321b2a,#52321b52),url("/images/borse.webp") center/cover no-repeat}.login-art p{font-size:27px;background:#fffdf4e3;padding:13px 20px;border-radius:9px;color:#583e32}
+
+/* No-link verification: code entry and remembered sessions. */
+.access-form .access-secondary{background:transparent;border:1px solid #d9bcae;color:#885b47;margin-top:0;justify-content:center;font-size:12px;cursor:pointer}
+.access-form .access-secondary:hover{background:#f8f0e9}
+.access-form .code-intro,.access-form .login-hint{font-size:12px;line-height:1.6;color:#886b5d;margin:0 0 5px}
+.access-form input#code{font-size:21px;letter-spacing:.25em;text-align:center;font-variant-numeric:tabular-nums}
+.library-header-actions{display:flex;align-items:center;gap:18px}
+.customer-logout{background:#f1e1d5;color:#774d3d;border:0;border-radius:9px;padding:11px 16px;font-size:13px;cursor:pointer}
+.customer-logout:disabled{opacity:.6}

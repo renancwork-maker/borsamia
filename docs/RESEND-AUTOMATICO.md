@@ -1,3 +1,5 @@
+> **ATTENZIONE — nuovo login via codice numerico**: qualsiasi indicazione storica sui link con `token_hash` è sostituita dalle istruzioni in `LEIA-PRIMEIRO-ACESSO-SEM-LINK.txt`.
+
 # BorsaMia — Envio automático Resend + Hotmart
 
 ## O que foi implementado

@@ -1,3 +1,5 @@
+> **Atualização (acesso sem link):** a versão atual substitui o Magic Link por OTP de 6 dígitos e sessão renovável. Consulte `LEIA-PRIMEIRO-ACESSO-SEM-LINK.txt`. O restante deste relatório refere-se à versão anterior.
+
 # Relatório de auditoria e correções — BorsaMia
 
 Data: 2026-10-20. Fonte: ZIP recebido nesta conversa. O conteúdo abaixo descreve **código local corrigido**, não publicação automática na Netlify.
